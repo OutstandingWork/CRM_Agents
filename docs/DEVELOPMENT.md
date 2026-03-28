@@ -10,9 +10,9 @@
 
 Main environment variables are defined in:
 
-- [.env.example](/home/pratyush/Desktop/CRM_AGENT/.env.example)
-- [.env](/home/pratyush/Desktop/CRM_AGENT/.env)
-- [backend/app/core/config.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/core/config.py)
+- [.env.example](../.env.example)
+- [.env](../.env)
+- [backend/app/core/config.py](../backend/app/core/config.py)
 
 Important values:
 
@@ -107,9 +107,9 @@ curl -X POST http://localhost:8001/api/agents/deal-intelligence/analyze \
 
 Start here:
 
-- [frontend/src/pages/App.tsx](/home/pratyush/Desktop/CRM_AGENT/frontend/src/pages/App.tsx)
-- [frontend/src/components/AgentPanel.tsx](/home/pratyush/Desktop/CRM_AGENT/frontend/src/components/AgentPanel.tsx)
-- [frontend/src/styles.css](/home/pratyush/Desktop/CRM_AGENT/frontend/src/styles.css)
+- [frontend/src/pages/App.tsx](../frontend/src/pages/App.tsx)
+- [frontend/src/components/AgentPanel.tsx](../frontend/src/components/AgentPanel.tsx)
+- [frontend/src/styles.css](../frontend/src/styles.css)
 
 The visual system is currently:
 
@@ -120,17 +120,17 @@ The visual system is currently:
 
 If you change backend response models, update:
 
-- [backend/app/core/models.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/core/models.py)
-- [frontend/src/lib/types.ts](/home/pratyush/Desktop/CRM_AGENT/frontend/src/lib/types.ts)
+- [backend/app/core/models.py](../backend/app/core/models.py)
+- [frontend/src/lib/types.ts](../frontend/src/lib/types.ts)
 
 ## Working On The Backend
 
 Start here:
 
-- [backend/app/api/routes.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/api/routes.py)
-- [backend/app/services/agent_service.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/services/agent_service.py)
-- [backend/app/agents/engine.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/agents/engine.py)
-- [backend/app/services/espo_adapter.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/services/espo_adapter.py)
+- [backend/app/api/routes.py](../backend/app/api/routes.py)
+- [backend/app/services/agent_service.py](../backend/app/services/agent_service.py)
+- [backend/app/agents/engine.py](../backend/app/agents/engine.py)
+- [backend/app/services/espo_adapter.py](../backend/app/services/espo_adapter.py)
 
 Rules of thumb:
 

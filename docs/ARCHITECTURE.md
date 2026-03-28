@@ -31,7 +31,7 @@ Typical user flow:
 
 ## Runtime Topology
 
-Defined in [docker-compose.yml](/home/pratyush/Desktop/CRM_AGENT/docker-compose.yml).
+Defined in [docker-compose.yml](../docker-compose.yml).
 
 Services:
 

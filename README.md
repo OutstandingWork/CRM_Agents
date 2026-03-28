@@ -66,11 +66,11 @@ The frontend is a single-screen operator workspace that:
 
 Key files:
 
-- [frontend/src/pages/App.tsx](/home/pratyush/Desktop/CRM_AGENT/frontend/src/pages/App.tsx)
-- [frontend/src/components/AgentPanel.tsx](/home/pratyush/Desktop/CRM_AGENT/frontend/src/components/AgentPanel.tsx)
-- [frontend/src/components/DealOverview.tsx](/home/pratyush/Desktop/CRM_AGENT/frontend/src/components/DealOverview.tsx)
-- [frontend/src/lib/api.ts](/home/pratyush/Desktop/CRM_AGENT/frontend/src/lib/api.ts)
-- [frontend/src/styles.css](/home/pratyush/Desktop/CRM_AGENT/frontend/src/styles.css)
+- [frontend/src/pages/App.tsx](frontend/src/pages/App.tsx)
+- [frontend/src/components/AgentPanel.tsx](frontend/src/components/AgentPanel.tsx)
+- [frontend/src/components/DealOverview.tsx](frontend/src/components/DealOverview.tsx)
+- [frontend/src/lib/api.ts](frontend/src/lib/api.ts)
+- [frontend/src/styles.css](frontend/src/styles.css)
 
 ### Backend
 
@@ -85,12 +85,12 @@ The main responsibilities are:
 
 Key files:
 
-- [backend/app/main.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/main.py)
-- [backend/app/api/routes.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/api/routes.py)
-- [backend/app/services/agent_service.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/services/agent_service.py)
-- [backend/app/agents/engine.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/agents/engine.py)
-- [backend/app/services/espo_adapter.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/services/espo_adapter.py)
-- [backend/app/core/models.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/core/models.py)
+- [backend/app/main.py](backend/app/main.py)
+- [backend/app/api/routes.py](backend/app/api/routes.py)
+- [backend/app/services/agent_service.py](backend/app/services/agent_service.py)
+- [backend/app/agents/engine.py](backend/app/agents/engine.py)
+- [backend/app/services/espo_adapter.py](backend/app/services/espo_adapter.py)
+- [backend/app/core/models.py](backend/app/core/models.py)
 
 ## Agent Flows
 
@@ -111,7 +111,7 @@ Each agent response returns:
 - `tools_used`
 - `timeline`
 
-The timeline and tool-call trace are generated in [backend/app/agents/engine.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/agents/engine.py) and rendered in [frontend/src/components/AgentPanel.tsx](/home/pratyush/Desktop/CRM_AGENT/frontend/src/components/AgentPanel.tsx).
+The timeline and tool-call trace are generated in [backend/app/agents/engine.py](backend/app/agents/engine.py) and rendered in [frontend/src/components/AgentPanel.tsx](frontend/src/components/AgentPanel.tsx).
 
 Current CRM persistence model:
 
@@ -138,14 +138,14 @@ The current stack was verified locally with:
 
 Read these next:
 
-- [docs/ARCHITECTURE.md](/home/pratyush/Desktop/CRM_AGENT/docs/ARCHITECTURE.md)
-- [docs/DEVELOPMENT.md](/home/pratyush/Desktop/CRM_AGENT/docs/DEVELOPMENT.md)
-- [docs/AGENT-FLOWS.md](/home/pratyush/Desktop/CRM_AGENT/docs/AGENT-FLOWS.md)
-- [docs/REPO-MAP.md](/home/pratyush/Desktop/CRM_AGENT/docs/REPO-MAP.md)
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)
+- [docs/AGENT-FLOWS.md](docs/AGENT-FLOWS.md)
+- [docs/REPO-MAP.md](docs/REPO-MAP.md)
 
 ## Testing
 
-Backend tests live in [backend/tests/test_api.py](/home/pratyush/Desktop/CRM_AGENT/backend/tests/test_api.py).
+Backend tests live in [backend/tests/test_api.py](backend/tests/test_api.py).
 
 Typical commands:
 

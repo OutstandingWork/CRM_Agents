@@ -9,11 +9,11 @@ The backend currently supports four agent workflows:
 - `retention`
 - `competitive_intel`
 
-Endpoints are defined in [backend/app/api/routes.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/api/routes.py).
+Endpoints are defined in [backend/app/api/routes.py](../backend/app/api/routes.py).
 
 ## Common Response Shape
 
-Every agent returns an `AgentInsight` object defined in [backend/app/core/models.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/core/models.py).
+Every agent returns an `AgentInsight` object defined in [backend/app/core/models.py](../backend/app/core/models.py).
 
 Core fields:
 
@@ -29,7 +29,7 @@ Core fields:
 
 ## Execution Stages
 
-The backend assembles a standard execution trace in [backend/app/agents/engine.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/agents/engine.py):
+The backend assembles a standard execution trace in [backend/app/agents/engine.py](../backend/app/agents/engine.py):
 
 1. `Context loaded`
 2. `Signals inspected`
@@ -51,7 +51,7 @@ This lets the frontend show what happened in a way that is understandable to ope
 
 ## LLM Behavior
 
-LLM enrichment happens in [backend/app/services/llm_service.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/services/llm_service.py).
+LLM enrichment happens in [backend/app/services/llm_service.py](../backend/app/services/llm_service.py).
 
 Behavior:
 
@@ -90,4 +90,4 @@ It returns candidate actions such as:
 
 Only `/api/agents/action/execute` performs the write, and only after the operator clicks `Apply`.
 
-Implementation lives in [backend/app/services/agent_service.py](/home/pratyush/Desktop/CRM_AGENT/backend/app/services/agent_service.py).
+Implementation lives in [backend/app/services/agent_service.py](../backend/app/services/agent_service.py).
