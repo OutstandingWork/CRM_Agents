@@ -1,0 +1,69 @@
+name: crm-agent
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8001/api}
+    ports:
+      - "5173:5173"
+    depends_on:
+      api:
+        condition: service_started
+
+  api:
+    build:
+      context: ./backend
+    environment:
+      CRM_AGENT_CRM_PROVIDER: ${CRM_AGENT_CRM_PROVIDER:-espo}
+      CRM_AGENT_ESPO_BASE_URL: ${CRM_AGENT_ESPO_BASE_URL:-http://espocrm}
+      CRM_AGENT_ESPO_API_KEY: ${CRM_AGENT_ESPO_API_KEY:-}
+      CRM_AGENT_ESPO_USERNAME: ${CRM_AGENT_ESPO_USERNAME:-admin}
+      CRM_AGENT_ESPO_PASSWORD: ${CRM_AGENT_ESPO_PASSWORD:-admin}
+      CRM_AGENT_ESPO_SEED_DEMO_DATA: ${CRM_AGENT_ESPO_SEED_DEMO_DATA:-true}
+      CRM_AGENT_CORS_ORIGINS: ${CRM_AGENT_CORS_ORIGINS:-["http://localhost:5173","http://frontend:5173"]}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.5-flash-lite}
+    ports:
+      - "8001:8000"
+    depends_on:
+      espocrm:
+        condition: service_started
+
+  espocrm-db:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: ${ESPOCRM_DB_ROOT_PASSWORD:-root}
+      MARIADB_DATABASE: ${ESPOCRM_DB_NAME:-espocrm}
+      MARIADB_USER: ${ESPOCRM_DB_USER:-espocrm}
+      MARIADB_PASSWORD: ${ESPOCRM_DB_PASSWORD:-espocrm}
+    volumes:
+      - espocrm-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+
+  espocrm:
+    image: espocrm/espocrm:latest
+    ports:
+      - "8080:80"
+    environment:
+      ESPOCRM_DATABASE_HOST: espocrm-db
+      ESPOCRM_DATABASE_NAME: ${ESPOCRM_DB_NAME:-espocrm}
+      ESPOCRM_DATABASE_USER: ${ESPOCRM_DB_USER:-espocrm}
+      ESPOCRM_DATABASE_PASSWORD: ${ESPOCRM_DB_PASSWORD:-espocrm}
+      ESPOCRM_ADMIN_USERNAME: ${CRM_AGENT_ESPO_USERNAME:-admin}
+      ESPOCRM_ADMIN_PASSWORD: ${CRM_AGENT_ESPO_PASSWORD:-admin}
+      ESPOCRM_SITE_URL: ${ESPOCRM_SITE_URL:-http://localhost:8080}
+    depends_on:
+      espocrm-db:
+        condition: service_healthy
+    volumes:
+      - espocrm-data:/var/www/html
+
+volumes:
+  espocrm-db-data:
+  espocrm-data:
