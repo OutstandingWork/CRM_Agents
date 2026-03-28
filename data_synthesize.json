@@ -1,1 +1,317 @@
 
+  {
+    "task": "Generate synthetic CRM demo data for a B2B revenue operations agent cockpit.",
+    "requirements": {
+      "output_format": "Return strict JSON only. No markdown. No commentary.",
+      "tone": "Realistic enterprise SaaS / RevOps / sales ops language",
+      "dataset_size": {
+        "companies": 3,
+        "contacts": 3,
+        "deals": 3,
+        "activities": 4,
+        "tasks": 2,
+        "notes": 2
+      },
+      "distribution": {
+        "healthy_deals": 1,
+        "medium_risk_deals": 1,
+        "high_risk_deals": 1
+      },
+      "constraints": [
+        "All IDs must be stable strings.",
+        "References must be valid across objects.",
+        "Use ISO 8601 timestamps with Z suffix.",
+        "Use realistic names, titles, companies, and deal narratives.",
+        "Include signal-driving text in activities and notes.",
+        "Include competitor mentions, reply gaps, pricing pressure, usage decline, sponsor changes, or support escalations where relevant."
+      ]
+    },
+    "schema": {
+      "companies": [
+        {
+          "id": "string",
+          "name": "string",
+          "industry": "string",
+          "employee_band": "string",
+          "region": "string",
+          "fit_score": "integer 1-100",
+          "competitive_pressure": "integer 1-100",
+          "churn_risk": "integer 1-100",
+          "summary": "string"
+        }
+      ],
+      "contacts": [
+        {
+          "id": "string",
+          "name": "string",
+          "title": "string",
+          "email": "string",
+          "company_id": "string",
+          "persona": "economic_buyer | champion | executive_sponsor | security | procurement | end_user",
+          "influence_score": "integer 1-100"
+        }
+      ],
+      "deals": [
+        {
+          "id": "string",
+          "name": "string",
+          "company_id": "string",
+          "primary_contact_id": "string",
+          "owner": "string",
+          "stage": "Lead | Qualified | Proposal | Negotiation | Closed Won | Closed Lost",
+          "amount": "integer",
+          "health_score": "integer 1-100",
+          "engagement_trend": "up | flat | down",
+          "risk_flags": ["string"],
+          "recommended_next_action": "string",
+          "agent_summary": "string",
+          "last_activity_at": "ISO-8601 string",
+          "stage_probability": "integer 1-100",
+          "days_in_stage": "integer",
+          "urgency": "low | medium | high"
+        }
+      ],
+      "activities": [
+        {
+          "id": "string",
+          "deal_id": "string",
+          "kind": "call | email | meeting | note | task",
+          "title": "string",
+          "timestamp": "ISO-8601 string",
+          "owner": "string",
+          "outcome": "string"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "string",
+          "deal_id": "string",
+          "title": "string",
+          "owner": "string",
+          "due_date": "YYYY-MM-DD",
+          "status": "open | done",
+          "source": "human | agent"
+        }
+      ],
+      "notes": [
+        {
+          "id": "string",
+          "entity_id": "string",
+          "entity_type": "deal | company | contact",
+          "content": "string",
+          "created_at": "ISO-8601 string",
+          "author": "string"
+        }
+      ]
+    },
+    "example_style": {
+      "companies": [
+        {
+          "id": "comp-apex",
+          "name": "Apex Robotics",
+          "industry": "Manufacturing AI",
+          "employee_band": "201-500",
+          "region": "North America",
+          "fit_score": 91,
+          "competitive_pressure": 74,
+          "churn_risk": 34,
+          "summary": "Scaling enterprise automation programs across three new plants."
+        },
+        {
+          "id": "comp-bluefin",
+          "name": "Bluefin Cloud",
+          "industry": "B2B SaaS",
+          "employee_band": "501-1000",
+          "region": "EMEA",
+          "fit_score": 88,
+          "competitive_pressure": 62,
+          "churn_risk": 57,
+          "summary": "Consolidating RevOps tooling while expanding enterprise accounts."
+        },
+        {
+          "id": "comp-nimbus",
+          "name": "Nimbus Health",
+          "industry": "Healthtech",
+          "employee_band": "1001-5000",
+          "region": "North America",
+          "fit_score": 79,
+          "competitive_pressure": 68,
+          "churn_risk": 81,
+          "summary": "Usage has softened after a difficult platform migration."
+        }
+      ],
+      "contacts": [
+        {
+          "id": "ctc-apex-1",
+          "name": "Maya Chen",
+          "title": "VP Revenue Operations",
+          "email": "maya.chen@apex.example",
+          "company_id": "comp-apex",
+          "persona": "economic_buyer",
+          "influence_score": 93
+        },
+        {
+          "id": "ctc-bluefin-1",
+          "name": "Omar Haddad",
+          "title": "Director of Sales Strategy",
+          "email": "omar.haddad@bluefin.example",
+          "company_id": "comp-bluefin",
+          "persona": "champion",
+          "influence_score": 83
+        },
+        {
+          "id": "ctc-nimbus-1",
+          "name": "Nina Patel",
+          "title": "Chief Customer Officer",
+          "email": "nina.patel@nimbus.example",
+          "company_id": "comp-nimbus",
+          "persona": "executive_sponsor",
+          "influence_score": 95
+        }
+      ],
+      "deals": [
+        {
+          "id": "deal-apex-expansion",
+          "name": "Apex Robotics Expansion",
+          "company_id": "comp-apex",
+          "primary_contact_id": "ctc-apex-1",
+          "owner": "Rhea Kapoor",
+          "stage": "Negotiation",
+          "amount": 180000,
+          "health_score": 46,
+          "engagement_trend": "down",
+          "risk_flags": [
+            "No stakeholder reply in 12 days",
+            "Competitor mention",
+            "Security review stalled"
+          ],
+          "recommended_next_action": "Run executive recovery play with ROI plus security talking points.",
+          "agent_summary": "Champion is still engaged, but legal and security stakeholders have gone quiet.",
+          "last_activity_at": "2026-03-26T16:27:15.495419Z",
+          "stage_probability": 57,
+          "days_in_stage": 19,
+          "urgency": "high"
+        },
+        {
+          "id": "deal-bluefin-netnew",
+          "name": "Bluefin Cloud Net-New",
+          "company_id": "comp-bluefin",
+          "primary_contact_id": "ctc-bluefin-1",
+          "owner": "Arjun Mehta",
+          "stage": "Proposal",
+          "amount": 95000,
+          "health_score": 71,
+          "engagement_trend": "flat",
+          "risk_flags": [
+            "Pricing hesitation"
+          ],
+          "recommended_next_action": "Package phased rollout with benchmark proof points.",
+          "agent_summary": "Healthy discovery completed, but pricing pressure is increasing.",
+          "last_activity_at": "2026-03-27T16:27:15.495490Z",
+          "stage_probability": 66,
+          "days_in_stage": 11,
+          "urgency": "medium"
+        },
+        {
+          "id": "deal-nimbus-renewal",
+          "name": "Nimbus Health Renewal",
+          "company_id": "comp-nimbus",
+          "primary_contact_id": "ctc-nimbus-1",
+          "owner": "Sara Iqbal",
+          "stage": "Negotiation",
+          "amount": 240000,
+          "health_score": 39,
+          "engagement_trend": "down",
+          "risk_flags": [
+            "Usage decline",
+            "Support escalations",
+            "Executive sponsor changed"
+          ],
+          "recommended_next_action": "Launch retention intervention and exec sponsor alignment plan.",
+          "agent_summary": "Renewal is at risk after adoption slipped in two regions.",
+          "last_activity_at": "2026-03-25T16:27:15.495514Z",
+          "stage_probability": 44,
+          "days_in_stage": 25,
+          "urgency": "high"
+        }
+      ],
+      "activities": [
+        {
+          "id": "act-1",
+          "deal_id": "deal-apex-expansion",
+          "kind": "email",
+          "title": "Sent revised security FAQ",
+          "timestamp": "2026-03-26T10:27:15.495531Z",
+          "owner": "Rhea Kapoor",
+          "outcome": "No reply yet"
+        },
+        {
+          "id": "act-2",
+          "deal_id": "deal-apex-expansion",
+          "kind": "meeting",
+          "title": "Commercial negotiation call",
+          "timestamp": "2026-03-23T16:27:15.495553Z",
+          "owner": "Rhea Kapoor",
+          "outcome": "Buyer positive, procurement cautious"
+        },
+        {
+          "id": "act-3",
+          "deal_id": "deal-bluefin-netnew",
+          "kind": "call",
+          "title": "Pricing review",
+          "timestamp": "2026-03-27T12:27:15.495565Z",
+          "owner": "Arjun Mehta",
+          "outcome": "Requested phased pricing option"
+        },
+        {
+          "id": "act-4",
+          "deal_id": "deal-nimbus-renewal",
+          "kind": "meeting",
+          "title": "Quarterly business review",
+          "timestamp": "2026-03-21T16:27:15.495576Z",
+          "owner": "Sara Iqbal",
+          "outcome": "Usage trend concerns raised by customer success"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "tsk-1",
+          "deal_id": "deal-apex-expansion",
+          "title": "Prepare executive ROI recap",
+          "owner": "Rhea Kapoor",
+          "due_date": "2026-03-29",
+          "status": "open",
+          "source": "agent"
+        },
+        {
+          "id": "tsk-2",
+          "deal_id": "deal-nimbus-renewal",
+          "title": "Schedule retention workshop with CS lead",
+          "owner": "Sara Iqbal",
+          "due_date": "2026-03-30",
+          "status": "open",
+          "source": "human"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-1",
+          "entity_id": "deal-apex-expansion",
+          "entity_type": "deal",
+          "content": "Champion mentioned AtlasIQ in the last procurement thread.",
+          "created_at": "2026-03-24T16:27:15.495648Z",
+          "author": "AI Revenue Copilot"
+        },
+        {
+          "id": "note-2",
+          "entity_id": "deal-nimbus-renewal",
+          "entity_type": "deal",
+          "content": "Support sentiment dipped after the migration bug backlog expanded.",
+          "created_at": "2026-03-22T16:27:15.495660Z",
+          "author": "Sara Iqbal"
+        }
+      ]
+    }
+  }
+
+
